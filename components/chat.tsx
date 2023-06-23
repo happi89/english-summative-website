@@ -4,7 +4,6 @@ import { useCompletion } from 'ai/react'
 import { Button } from './ui/button'
 
 export default function Chat({ defaultInput }: { defaultInput: string }) {
-  console.log("🚀 ~ file: chat.tsx:7 ~ Chat ~ defaultInput:", defaultInput)
   const {
     completion,
     isLoading,

@@ -155,6 +155,5 @@ export default function Poll({ poll }: Props) {
         <Chat defaultInput={poll?.question} />
       </CardFooter>
     </Card>
-
   )
 }
