@@ -62,14 +62,18 @@ export default function Poll({ poll }: Props) {
   const total = option1Votes + option2Votes
 
   useEffect(() => {
-    // Perform localStorage action
-    const optionValue = typeof window !== 'undefined' ? localStorage.getItem(poll?._id) : null;
-    const option = optionValue as '1' | '2' | null || undefined;
-    setVoted(option === '1' || option === '2');
-    setOption(option);
+    try {
+      // Perform localStorage action
+      const optionValue = typeof window !== 'undefined' ? localStorage.getItem(poll?._id) : null;
+      const option = optionValue as '1' | '2' | null || undefined;
+      setVoted(option === '1' || option === '2');
+      setOption(option);
 
-    if (option) {
-      form.setValue('option', option);
+      if (option) {
+        form.setValue('option', option);
+      }
+    } catch (error) {
+      console.log(error)
     }
   }, [])
 

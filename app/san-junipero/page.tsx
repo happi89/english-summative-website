@@ -14,7 +14,7 @@ const Poll = dynamic(() => import('@/components/poll'))
 const SanJunipero = async () => {
   const polls = await fetch(`${ process.env.SITE_URL }/api/poll?page=san-junipero`, {
     cache: 'no-store'
-  }).then(res => res.json())
+  }).then(res => res.json()).catch(err => console.log(err))
 
   return (
     <Container>

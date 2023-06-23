@@ -14,7 +14,7 @@ const Poll = dynamic(() => import('@/components/poll'))
 const Handmaid = async () => {
   const polls = await fetch(`${ process.env.SITE_URL }/api/poll?page=handmaid`, {
     cache: 'no-store'
-  }).then(res => res.json())
+  }).then(res => res.json()).catch(err => console.log(err))
 
   return (
     <Container>
