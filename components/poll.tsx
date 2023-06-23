@@ -63,13 +63,10 @@ export default function Poll({ poll }: Props) {
 
   useEffect(() => {
     // Perform localStorage action
-    let optionValue: '1' | '2' | null
-    if (typeof window !== 'undefined') {
-      optionValue = localStorage.getItem(poll?._id) as '1' | '2' | null
-      const option = optionValue || undefined
-      setVoted(option === '1' || option === '2')
-      setOption(option)
-    }
+    const optionValue = typeof window !== 'undefined' ? localStorage.getItem(poll?._id) : null;
+    const option = optionValue as '1' | '2' | null || undefined;
+    setVoted(option === '1' || option === '2');
+    setOption(option);
 
     if (option) {
       form.setValue('option', option);
@@ -91,7 +88,7 @@ export default function Poll({ poll }: Props) {
       })
 
       setVoted(true)
-      localStorage.setItem(`${ poll?._id }`, data.option);
+      localStorage.setItem(`${ poll?._id }`, JSON.stringify(data.option));
       router.refresh()
     } catch (error) {
       console.log("🚀 ~ file: poll.tsx:39 ~ handleVote ~ error:", error)
