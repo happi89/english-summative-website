@@ -1,6 +1,7 @@
 'use client'
 
 import { useCompletion } from 'ai/react'
+import { Loader2 } from 'lucide-react'
 import { Button } from './ui/button'
 
 export default function Chat({ defaultInput }: { defaultInput: string }) {
@@ -19,6 +20,7 @@ export default function Chat({ defaultInput }: { defaultInput: string }) {
         <h1 className='text-lg font-medium'>What does Donald Trump Think?</h1>
         <p><strong>Trump Says:</strong> {completion}</p>
         <Button disabled={isLoading} type="submit">
+          {isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
           ASK
         </Button>
       </form>

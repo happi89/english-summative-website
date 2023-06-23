@@ -34,6 +34,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Separator } from "./ui/separator"
 import dynamic from "next/dynamic"
+import { Loader2 } from "lucide-react"
 const Chat = dynamic(() => import('@/components/chat'))
 
 interface Props {
@@ -57,6 +58,7 @@ export default function Poll({ poll }: Props) {
     option2Votes
   } = poll
   const [voted, setVoted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [option, setOption] = useState<'1' | '2' | undefined>(undefined)
   const router = useRouter()
   const total = option1Votes + option2Votes
@@ -85,8 +87,8 @@ export default function Poll({ poll }: Props) {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data, 'data')
     try {
+      setLoading(true)
       await fetch(`/api/poll?id=${ poll?._id }&option=${ data.option }`, {
         method: 'POST'
       })
@@ -94,6 +96,7 @@ export default function Poll({ poll }: Props) {
       setVoted(true)
       localStorage.setItem(`${ poll?._id }`, data.option);
       router.refresh()
+      setLoading(false)
     } catch (error) {
       console.log("🚀 ~ file: poll.tsx:39 ~ handleVote ~ error:", error)
     }
@@ -145,7 +148,10 @@ export default function Poll({ poll }: Props) {
                   </FormControl>
                   <FormMessage />
                 </FormItem>)} />
-            <Button type="submit" disabled={voted}>Submit</Button>
+            <Button type="submit" disabled={voted}>
+              {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+              Submit
+            </Button>
           </form>
         </Form>
 
