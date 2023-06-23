@@ -25,7 +25,7 @@ const Marxist = async () => {
         <div className="w-full my-12">
           <AspectRatio ratio={16 / 9}>
             <Image
-              src="/karl-marx.png"
+              src="/Karl-Marx.png"
               fill
               alt="Image"
               className="object-cover rounded-md"

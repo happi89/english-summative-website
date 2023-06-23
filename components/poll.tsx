@@ -92,7 +92,7 @@ export default function Poll({ poll }: Props) {
       })
 
       setVoted(true)
-      localStorage.setItem(`${ poll?._id }`, JSON.stringify(data.option));
+      localStorage.setItem(`${ poll?._id }`, data.option);
       router.refresh()
     } catch (error) {
       console.log("🚀 ~ file: poll.tsx:39 ~ handleVote ~ error:", error)
@@ -124,7 +124,7 @@ export default function Poll({ poll }: Props) {
                             <FormLabel htmlFor="r1">{option1Text}</FormLabel>
                           </div>
                           <p hidden={!voted}>
-                            {total} {total === 1 ? 'Vote' : 'Votes'}
+                            {option1Votes} {option1Votes === 1 ? 'Vote' : 'Votes'}
                           </p>
                         </div>
                         <Progress hidden={!voted} value={+((option1Votes / (total)) * 100).toFixed(1)} />
@@ -136,7 +136,7 @@ export default function Poll({ poll }: Props) {
                             <FormLabel htmlFor="r2">{option2Text}</FormLabel>
                           </div>
                           <p hidden={!voted}>
-                            {total} {total === 1 ? 'Vote' : 'Votes'}
+                            {option2Votes} {option2Votes === 1 ? 'Vote' : 'Votes'}
                           </p>
                         </div>
                         <Progress hidden={!voted} value={+((option2Votes / (total)) * 100).toFixed(1)} />

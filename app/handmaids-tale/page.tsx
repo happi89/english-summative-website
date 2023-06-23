@@ -48,7 +48,7 @@ const Handmaid = async () => {
           <div className="w-full mb-8">
             <AspectRatio ratio={16 / 9}>
               <Image
-                src="/handmaid.png"
+                src="/handmaids.jpeg"
                 fill
                 alt="Image"
                 className="object-cover rounded-md"
