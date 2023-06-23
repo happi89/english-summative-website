@@ -63,16 +63,17 @@ export default function Poll({ poll }: Props) {
 
   useEffect(() => {
     // Perform localStorage action
-    const optionValue = localStorage.getItem(poll?._id) as '1' | '2' | null
-    const option = optionValue || undefined
-    setVoted(option === '1' || option === '2')
-    setOption(option)
+    let optionValue: '1' | '2' | null
+    if (typeof window !== 'undefined') {
+      optionValue = localStorage.getItem(poll?._id) as '1' | '2' | null
+      const option = optionValue || undefined
+      setVoted(option === '1' || option === '2')
+      setOption(option)
+    }
 
     if (option) {
       form.setValue('option', option);
     }
-
-    console.log(form.getValues())
   }, [])
 
   const form = useForm<z.infer<typeof FormSchema>>({
